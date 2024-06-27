@@ -6,7 +6,14 @@
     <div class="row">
         <h2>Lista de Productos</h2>
         <div class="mb-3 mt-3">
-            <a href="#" class="btn btn-success mb-3">Agregar producto</a>
+            <a href="/productos/registro" class="btn btn-success mb-3">Agregar producto</a>
+        </div>
+        <div class="mensaje">
+            @if( session('mensaje') )
+            <div class="alert alert-{{ session('css') }}">
+                {{ session('mensaje') }}
+            </div>
+            @endif
         </div>
         <table class="table">
             <thead class="table-dark">
@@ -19,30 +26,18 @@
                 </tr>
             </thead>
             <tbody>
+            @foreach($productos as $producto)
                 <tr>
-                <th scope="row">1</th>
-                <td>Notebook</td>
-                <td>Lorem ipsum dolor sit amet consectetur adipisicing.</td>
-                <td>HP</td>
-                <td><a href="#" class="btn btn-warning">Editar</a></td>
-                <td><a href="#" class="btn btn-danger">Eliminar</a></td>
+                    <th scope="row">{{ $producto->id }}</th>
+                    <td>{{ $producto->nombre }}</td>
+                    <td>{{ $producto->descripcion }}</td>
+                    <td>{{ $producto->marca }}</td>
+                    <td>{{ $producto->cantidad }}</td>
+                    <td>{{ $producto->precio }}</td>
+                    <td><a href="/marcas/editar/{{ $producto->id }}" class="btn btn-warning">Editar</a></td>
+                    <td><a href="/marcas/eliminar/{{ $producto->id }}" class="btn btn-danger">Eliminar</a></td>
                 </tr>
-                <tr>
-                <th scope="row">2</th>
-                <td>Notebook</td>
-                <td>Lorem ipsum dolor sit amet consectetur adipisicing.</td>
-                <td>Lenovo</td>
-                <td><a href="#" class="btn btn-warning">Editar</a></td>
-                <td><a href="#" class="btn btn-danger">Eliminar</a></td>
-                </tr>
-                <tr>
-                <th scope="row">3</th>
-                <td>Ipad</td>
-                <td>Lorem ipsum dolor sit amet consectetur adipisicing.</td>
-                <td>Apple</td>
-                <td><a href="#" class="btn btn-warning">Editar</a></td>
-                <td><a href="#" class="btn btn-danger">Eliminar</a></td>
-                </tr>
+            @endforeach
             </tbody>
             </table>
     </div>

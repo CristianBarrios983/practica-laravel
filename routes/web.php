@@ -38,6 +38,14 @@ Route::get('/marcas', function () {
     return view('marcas', ['marcas' => $marcas]);
 });
 
+Route::get('/productos', function () {
+    $productos = DB::table('productos')
+                ->select('id','nombre', 'descripcion','marca','cantidad','precio')
+                ->get();
+
+    return view('productos', ['productos' => $productos]);
+});
+
 // Route::get('/marcas', function () {
 //     return view('marcas');
 // });
